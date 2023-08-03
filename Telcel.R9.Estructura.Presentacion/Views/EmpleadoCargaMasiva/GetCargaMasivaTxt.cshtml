@@ -1,0 +1,58 @@
+﻿@model Telcel.R9.Estructura.Negocio.Result
+@{
+    ViewData["Title"] = "GetCargaMasivaTxt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row text-center">
+        <h1>CARGA DE EMPLEADOS</h1>
+        <hr />
+    </div>
+    <br />
+    <div class="row">
+        <p><b>Seleccione el archivo que desea cargar</b></p>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <a><input type="submit" value="TXT" class="btn btn-primary col-md-12" id="txt" /></a>
+        </div>
+    </div>
+    <div class="row text-center">
+        @using (Html.BeginForm("PostCargaMasivaTxt", "EmpleadoCargaMasiva", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="row g-3" id="fuTxt" style="display:none">
+                <div class="row g-3">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi bi-filetype-txt"></i></span>
+                        <input type="file" class="form-control" name="file" />
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-12">
+                        <a><input type="submit" value="Pocesar archivo" class="btn btn-info col-md-6" /></a>
+                        <br />
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-12">
+                        <a><input type="submit" value="Insertar" class="btn btn-info col-md-6" /></a>
+                        <br />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script type="text/javascript">
+        $('#txt').click(function() {
+            $('#fuTxt').toggle('slow', function() {
+            });
+        });
+    </script>
+}

@@ -1,0 +1,63 @@
+﻿@model Telcel.R9.Estructura.Negocio.Empleado
+@{
+    ViewData["Title"] = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row text-center">
+        <h1>@ViewBag.Titulo</h1>
+        <hr />
+    </div>
+    <br />
+    <div class="row">
+        <p><b>LLENE LOS CAMPOS CON LA INFORMACION DEL EMPLEADO</b></p>
+    </div>
+    <br />
+    @using (Html.BeginForm("Form", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row">
+            <div class="col-md-12">
+                @Html.LabelFor(model => model.EmpleadoID, new { @class = "control-label visually-hidden" })
+                <div>
+                    @Html.TextBoxFor(model => model.EmpleadoID, new { @class = "form-control visually-hidden" })
+                    @Html.ValidationMessageFor(model => model.EmpleadoID)
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                @Html.LabelFor(model => model.Nombre, new { @class = "control-label col-md-12" })
+                <div>
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control col-md-12" })
+                    @Html.ValidationMessageFor(model => model.Nombre)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Departamento.DepartamentoID, new { @class = "control-label col-md-12" })
+                <div>
+                    @Html.DropDownListFor(model => model.Departamento.DepartamentoID, new SelectList(Model.Departamento.Departamentos, "DepartamentoID", "Descripcion"), "Seleccione una opción...", new { @class = "form-control col-md-12" })
+                    @Html.ValidationMessageFor(model => model.Departamento.DepartamentoID)
+                </div>
+            </div>
+            <div class="col-md-3">
+                @Html.LabelFor(model => model.Puesto.PuestoID, new { @class = "control-label col-md-12" })
+                <div>
+                    @Html.DropDownListFor(model => model.Puesto.PuestoID, new SelectList(Model.Puesto.Puestos, "PuestoID", "Descripcion"), "Seleccione una opción...", new { @class = "form-control col-md-12" })
+                    @Html.ValidationMessageFor(model => model.Puesto.PuestoID)
+                </div>
+            </div>
+        </div>
+        <br />
+        <hr />
+        <br />
+        <div class="row">
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-success bi bi-database-fill-add col-md-12"> @ViewBag.Accion</button>
+            </div>
+            <div class="col-md-6">
+                @Html.ActionLink(" Regresar", "GetAll", "Empleado", "", new { @class = "btn btn-danger bi bi-arrow-left-square-fill col-md-12" })
+            </div>
+        </div>
+    }
+
+</div>
