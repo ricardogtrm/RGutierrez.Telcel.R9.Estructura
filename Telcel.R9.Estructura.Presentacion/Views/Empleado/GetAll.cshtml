@@ -3,6 +3,7 @@
     ViewData["Title"] = "GetAll";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css" />
 <div class="container">
     <div class="row text-center">
         <h1>EMPLEADOS</h1>
@@ -42,7 +43,7 @@
     <br />
     @if (Model.Empleados != null)
     {
-        <table class="table table-dark table-hover table-responsive">
+        <table class="table table-dark table-hover table-responsive" id="myTable">
             <thead>
                 <tr>
                     <th scope="col" class="visually-hidden">EMPLEADO ID</th>
@@ -57,17 +58,27 @@
             <tbody>
                 @foreach (Telcel.R9.Estructura.Negocio.Empleado empleado in Model.Empleados)
                 {
-                <tr>
-                    <td class="visually-hidden">@empleado.EmpleadoID</td>
-                    <td>@empleado.Nombre</td>
-                    <td class="visually-hidden">@empleado.Departamento.DepartamentoID</td>
-                    <td>@empleado.Departamento.Descripcion</td>
-                    <td class="visually-hidden">@empleado.Puesto.PuestoID</td>
-                    <td>@empleado.Puesto.Descripcion</td>
-                    <td><a href="@Url.Action("Delete","Empleado", new { EmpleadoID = empleado.EmpleadoID })" class="btn btn-danger bi bi-trash3-fill"></a></td>
-                </tr>
+                    <tr>
+                        <td class="visually-hidden">@empleado.EmpleadoID</td>
+                        <td>@empleado.Nombre</td>
+                        <td class="visually-hidden">@empleado.Departamento.DepartamentoID</td>
+                        <td>@empleado.Departamento.Descripcion</td>
+                        <td class="visually-hidden">@empleado.Puesto.PuestoID</td>
+                        <td>@empleado.Puesto.Descripcion</td>
+                        <td><a href="@Url.Action("Delete","Empleado", new { EmpleadoID = empleado.EmpleadoID })" class="btn btn-danger bi bi-trash3-fill"></a></td>
+                    </tr>
                 }
             </tbody>
         </table>
     }
 </div>
+@section Scripts{
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#myTable').DataTable();
+        });
+    </script>
+}
